@@ -1965,7 +1965,7 @@ function Atr_OnAuctionUpdate (...)
 
     local isDup = gCurrentPane.activeSearch:CheckForDuplicatePage ();
 
-    if (not isDup) then
+    if not isDup then
 
       local done = gCurrentPane.activeSearch:AnalyzeResultsPage();
 

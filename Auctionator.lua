@@ -360,9 +360,11 @@ function Atr_OnChatMsgAddon (...)
       zz (s);
     end
 
-    if (zc.StringStartsWith (msg, "VREQ_")) then
-      SendAddonMessage ("ATR", "V_"..AuctionatorVersion, "WHISPER", sender);
-    end
+    -- TODO: This doesn't need to be removed in this branch, but should probably go,
+    -- unless we want to update the optipons pane?
+    -- if (zc.StringStartsWith (msg, "VREQ_")) then
+    --   SendAddonMessage ("ATR", "V_"..AuctionatorVersion, "WHISPER", sender);
+    -- end
 
     if (zc.StringStartsWith (msg, "IREQ_")) then
       collectgarbage  ("collect");
@@ -371,15 +373,15 @@ function Atr_OnChatMsgAddon (...)
       SendAddonMessage ("ATR", "I_"..Atr_GetDBsize().."_"..mem.."_"..#AUCTIONATOR_SHOPPING_LISTS.."_"..GetRealmFacInfoString(), "WHISPER", sender)
     end
 
-    if (zc.StringStartsWith (msg, "V_") and time() - VREQ_sent < 5) then
-
-      local herVerString = string.sub (msg, 3);
-    --  zc.md ("version found:", herVerString, "   ", sender, "     response time:", time() - VREQ_sent);
-      local outOfDate = CheckVersion (herVerString);
-      if (outOfDate) then
-        zc.AddDeferredCall (3, "Atr_VersionReminder", nil, nil, "VR");
-      end
-    end
+    -- TODO: See note above, this shit is version reminder stuff also
+    -- if (zc.StringStartsWith (msg, "V_") and time() - VREQ_sent < 5) then
+    --   local herVerString = string.sub (msg, 3);
+    -- --  zc.md ("version found:", herVerString, "   ", sender, "     response time:", time() - VREQ_sent);
+    --   local outOfDate = CheckVersion (herVerString);
+    --   if (outOfDate) then
+    --     zc.AddDeferredCall (3, "Atr_VersionReminder", nil, nil, "VR");
+    --   end
+    -- end
   end
 
   Atr_OnChatMsgAddon_ShoppingListCmds (prefix, msg, distribution, sender)
@@ -5125,7 +5127,7 @@ end
 -----------------------------------------
 
 function Atr_GetCurrentPane ()      -- so other modules can use gCurrentPane
-  Auctionator.Debug.Message( 'Atr_GetCurrentPane' )
+  -- Auctionator.Debug.Message( 'Atr_GetCurrentPane' )
 
   return gCurrentPane;
 end
